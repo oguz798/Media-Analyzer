@@ -1,0 +1,5 @@
+[
+  {"title": "Inception", "year": 2010, "genres": ["Sci-Fi", "Thriller"], "watched": true, "size_gb": 8.5},
+  {"title": "Interstellar", "year": 2014, "genres": ["Sci-Fi"], "watched": false, "size_gb": 12.3},
+  {"title": "The Dark Knight", "year": 2008, "genres": ["Action"], "watched": true, "size_gb": 9.1}
+]
