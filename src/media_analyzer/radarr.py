@@ -1,7 +1,8 @@
 import requests
+from media_analyzer.models import Movie
 
 
-def fetch_radarr_movies(radarr_url: str, api_key: str) -> list[dict]:
+def fetch_radarr_movies(radarr_url: str, api_key: str) -> list[Movie]:
     headers = {"X-Api-Key": api_key}
     movie_url = radarr_url + "/api/v3/movie"
     response = requests.get(movie_url, headers=headers)
@@ -18,12 +19,12 @@ def fetch_radarr_movies(radarr_url: str, api_key: str) -> list[dict]:
     for movie in movie_data:
         size_bytes = movie.get("sizeOnDisk", 0)
         size_gb = size_bytes / (1024**3)
-        normalized_movie = {
-            "title": movie["title"],
-            "year": movie["year"],
-            "size_gb": size_gb,
-            "watched": False,
-        }
+        normalized_movie = Movie(
+            title=movie["title"],
+            year=movie["year"],
+            size_gb=size_gb,
+            watched=False,
+        )
 
         normalized_movies.append(normalized_movie)
     return normalized_movies

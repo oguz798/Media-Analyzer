@@ -1,4 +1,7 @@
-def summarize_movies(movies: list[dict]) -> dict:
+from media_analyzer.models import Movie
+
+
+def summarize_movies(movies: list[Movie]) -> dict:
     """
     Return a summary dict with:
       - total_movies (int)
@@ -18,14 +21,25 @@ def summarize_movies(movies: list[dict]) -> dict:
 
     oldest_year = None
     for movie in movies:
-        
         summary["total_movies"] += 1
-        summary["total_size_gb"] += movie["size_gb"]
-        if not movie["watched"]:
+        summary["total_size_gb"] += movie.size_gb
+        if not movie.watched:
             summary["unwatched_count"] += 1
         if oldest_year is None:
-            oldest_year = movie["year"]
+            oldest_year = movie.year
         else:
-            oldest_year = min(movie["year"], oldest_year)
+            oldest_year = min(movie.year, oldest_year)
     summary["oldest_year"] = oldest_year
     return summary
+
+
+def largest_movies(movies: list[Movie], n: int) -> list[Movie]:
+
+    sorted_movies = sorted(movies, key=lambda movie: movie.size_gb, reverse=True)
+    return sorted_movies[:n]
+
+
+def get_unwatched_movies(movies: list[Movie]) -> list[Movie]:
+
+    unwatched = [movie for movie in movies if not movie.watched]
+    return unwatched
