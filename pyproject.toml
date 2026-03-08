@@ -3,7 +3,7 @@ name = "media-library-analyzer"
 version= "0.1.0"
 description = "A tool to analyze media libraries and generate reports."
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["requests"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
